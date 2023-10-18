@@ -1,12 +1,10 @@
-import { type } from 'os';
-
 export type IButtonProps = {
 	callbackFunction: Function;
-	isDisabled: boolean;
+	isDisabled?: boolean;
 	iconSource: string;
 	iconAlt: string;
-	index: number;
-	addedtyle?: IButtonStylesProps;
+	addedStyle?: IButtonStylesProps;
+	actionType: string;
 };
 
 export type IButtonStylesProps = {
@@ -23,6 +21,7 @@ export type IButtonStylesProps = {
 	fontWeight?: string;
 	display?: string;
 };
+
 type ButtonData = {
 	id: string;
 	index: number;

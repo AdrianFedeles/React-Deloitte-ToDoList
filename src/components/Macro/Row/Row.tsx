@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './Row.scss';
 import Button from '../../Atomic/Button/Button';
 import ArrowDown from '../../../assets/Arrows/ArrowDown.svg';
@@ -7,68 +7,64 @@ import Edit from '../../../assets/Arrows/Edit.svg';
 import CheckBox from '../../../assets/Arrows/CheckBox.svg';
 import UnCheckBox from '../../../assets/Arrows/UnCheckBox.svg';
 import Delete from '../../../assets/Arrows/Delete.svg';
+import { rowDataModelProps } from './Row.interface';
 
-const Row = () => {
-	const [parentState, setParentState] = useState<object>({});
-	const [isDisabled, setIsDisabled] = useState<boolean>(false);
+const Row = (props: { item: rowDataModelProps; maxIndex: number; actionHandler: Function }) => {
+	const { item, maxIndex, actionHandler } = props;
+	const { idRow, index, isDone, text } = item;
 
-	console.log(parentState, 'parentState din useState din app');
-
-	const updateParentState = (data: object) => {
-		setParentState({ data });
+	const updateParentState = (actionType: string) => {
+		actionHandler(actionType, item);
 	};
 
 	return (
-		<li id='' className='wrapper-row'>
+		<li id={idRow} className='wrapper-row'>
 			<div className='container-row'>
 				<div className='container-arrows'>
 					<Button
 						callbackFunction={updateParentState}
-						isDisabled={isDisabled}
-						iconSource={ArrowDown}
-						iconAlt={'ArrowDown'}
-						index={0}
-						addedtyle={{
+						actionType='ArrowUp'
+						isDisabled={index === 0 ? true : false}
+						iconSource={ArrowUp}
+						iconAlt={'ArrowUp'}
+						addedStyle={{
 							border: '1px solid #950f0f',
 							fontSize: '30px',
+
 							//sa recunosc proprietatile de stilizare custom
-							display: '',
-							height: '',
-							width: '',
-							padding: '',
-							margin: '',
-							backgroundColor: '',
-							cursor: '',
-							borderRadius: '',
-							fontWeight: '',
+							// display: '',
+							// height: '',
+							// width: '',
+							// padding: '',
+							// margin: '',
+							// backgroundColor: '',
+							// cursor: '',
+							// borderRadius: '',
+							// fontWeight: '',
 						}}
 					/>
 					<Button
 						callbackFunction={updateParentState}
-						isDisabled={isDisabled}
-						iconSource={ArrowUp}
-						iconAlt={'ArrowUp'}
-						index={0}
-						addedtyle={{
+						actionType='ArrowDown'
+						isDisabled={index === maxIndex - 1 ? true : false}
+						iconSource={ArrowDown}
+						iconAlt={'ArrowDown'}
+						addedStyle={{
 							border: '1px solid #950f0f',
 							fontSize: '30px',
 						}}
 					/>
 				</div>
 				<div className='todo-row'>
-					<p className='todo-paragraph'>
-						Bacovia este un Jmecher Moldovean cu parinti Bucuresteni si Ilfoveni care de mic a
-						mancat pamant radioactiv si i s-a aprins ochi
-					</p>
+					<p className={`todo-paragraph ${isDone ? 'underlineParagraph' : ''}`}>{text}</p>
 				</div>
 				<div className='container-action'>
 					<Button
 						callbackFunction={updateParentState}
-						isDisabled={isDisabled}
+						actionType='Edit'
 						iconSource={Edit}
 						iconAlt={'Edit'}
-						index={0}
-						addedtyle={{
+						addedStyle={{
 							border: '1px solid #3333e6',
 							fontSize: '30px',
 						}}
@@ -76,36 +72,34 @@ const Row = () => {
 					<div className='container-checked-box'>
 						<Button
 							callbackFunction={updateParentState}
-							isDisabled={isDisabled}
+							actionType='CheckBox'
 							iconSource={CheckBox}
 							iconAlt={'CheckBox'}
-							index={0}
-							addedtyle={{
-								border: '1px solid #0000ff',
+							addedStyle={{
+								display: `${isDone ? 'block' : 'none'}`,
+								border: '1px solid #c8c451',
 								fontSize: '30px',
 							}}
 						/>
 						<Button
 							callbackFunction={updateParentState}
-							isDisabled={isDisabled}
+							actionType='UnCheckBox'
 							iconSource={UnCheckBox}
 							iconAlt={'UnCheckBox'}
-							index={0}
-							addedtyle={{
-								display: 'none',
-								border: '1px solid #c13ee6',
+							addedStyle={{
+								display: `${isDone ? 'none' : 'block'}`,
+								border: '1px solid #d900ff',
 								fontSize: '30px',
 							}}
 						/>
 					</div>
 					<Button
 						callbackFunction={updateParentState}
-						isDisabled={isDisabled}
+						actionType='Delete'
 						iconSource={Delete}
 						iconAlt={'Delete'}
-						index={0}
-						addedtyle={{
-							border: '1px solid #ff0044',
+						addedStyle={{
+							border: '1px solid #ff0000',
 							fontSize: '30px',
 						}}
 					/>

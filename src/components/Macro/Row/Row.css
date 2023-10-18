@@ -33,6 +33,10 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+.wrapper-row .container-row .todo-row .underlineParagraph {
+  text-decoration: line-through;
+  color: #c8c451;
+}
 .wrapper-row .container-row .container-action {
   width: 10%;
   height: auto;
@@ -47,4 +51,4 @@
   display: flex;
   flex-direction: column;
   border-radius: 5px;
-}/*# sourceMappingURL=row.css.map */
+}/*# sourceMappingURL=Row.css.map */

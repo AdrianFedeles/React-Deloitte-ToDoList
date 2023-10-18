@@ -31,6 +31,10 @@
 				overflow: hidden;
 				text-overflow: ellipsis;
 			}
+			.underlineParagraph {
+				text-decoration: line-through;
+				color: #c8c451;
+			}
 		}
 		.container-action {
 			width: 10%;
